@@ -1,7 +1,10 @@
 import { useState } from "react";
 import Expense from "./components/Expenses/Expense";
 import NewExpense from "./components/NewExpense/NewExpense";
+import axios from "axios";
 
+const weather = axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=2bfe5bf547d1711c4c173fce24a90b71`).then(res => {}).catch(err => {});
+console.log(weather);
 const DUMMY_EXPENSES = [
   {
     id: "e1",
@@ -35,6 +38,10 @@ function App() {
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expense items={expenses} />
+      <div>
+        <h1>Weather</h1>
+        <p>{weather.data.weather[0].description}</p>
+      </div>
     </div>
   );
 }
